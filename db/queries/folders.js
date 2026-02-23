@@ -6,7 +6,7 @@ import db from "#db/client";
  * @param {string} folder.name - The name of the new folder
  * @returns The newly created folder
  */
-export async function createFolder({ name }) {
+export async function createFolder(name) {
   const SQL = `
     INSERT INTO folders (name)
     VALUES ($1)
@@ -45,7 +45,7 @@ export async function getFolders() {
  * @returns The folder with the given id
  * @returns undefined if there is no folder with the given id
  */
-export async function getFolder({ id }) {
+export async function getFolder(id) {
   const SQL = `
     SELECT * FROM folders
     WHERE id = $1
