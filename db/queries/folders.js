@@ -1,5 +1,11 @@
 import db from "#db/client";
 
+/**
+ * Create a new folder in the folders table
+ * @param {Object} folder - The new folder to create
+ * @param {string} folder.name - The name of the new folder
+ * @returns The newly created folder
+ */
 export async function createFolder({ name }) {
   const SQL = `
     INSERT INTO folders (name)
@@ -16,6 +22,13 @@ export async function createFolder({ name }) {
   }
 }
 
+/**
+ * Retrieves a folder from the folder table by id
+ * @param {Object} folder - The folder to search for
+ * @param {number} folder.id - The id of the folder to search for
+ * @returns The folder with the given id
+ * @returns undefined if there is no folder with the given id
+ */
 export async function getFolder({ id }) {
   const SQL = `
     SELECT * FROM folders
