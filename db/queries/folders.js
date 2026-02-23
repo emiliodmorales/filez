@@ -23,6 +23,22 @@ export async function createFolder({ name }) {
 }
 
 /**
+ * Retrieves all the folders from the database
+ * @returns An array of all folders
+ */
+export async function getFolders() {
+  const SQL = `
+    SELECT * FROM folders
+  `;
+  try {
+    const { rows: folders } = await db.query(SQL);
+    return folders;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+/**
  * Retrieves a folder from the folder table by id
  * @param {Object} folder - The folder to search for
  * @param {number} folder.id - The id of the folder to search for
