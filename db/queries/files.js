@@ -8,9 +8,9 @@ export async function createFile({ name, size, folder_id }) {
   `;
   try {
     const {
-      rows: [folder],
+      rows: [file],
     } = await db.query(SQL, [name, size, folder_id]);
-    return folder;
+    return file;
   } catch (err) {
     console.error(err);
   }
