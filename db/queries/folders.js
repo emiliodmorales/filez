@@ -15,3 +15,18 @@ export async function createFolder({ name }) {
     console.error(err);
   }
 }
+
+export async function getFolder({ id }) {
+  const SQL = `
+    SELECT * FROM folders
+    WHERE id = $1
+  `;
+  try {
+    const {
+      rows: [folder],
+    } = await db.query(SQL, [id]);
+    return folder;
+  } catch (err) {
+    console.error(err);
+  }
+}
