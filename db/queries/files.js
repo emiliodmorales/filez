@@ -30,7 +30,10 @@ export async function createFile({ name, size, folder_id }) {
  */
 export async function getFiles() {
   const SQL = `
-    SELECT * FROM files
+    SELECT files.*, folders.name AS folder_name
+    FROM files
+    LEFT JOIN folders
+    ON files.folder_id = folders.id
   `;
   try {
     const { rows: files } = await db.query(SQL);
