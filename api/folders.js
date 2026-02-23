@@ -3,6 +3,7 @@ const router = Router();
 export default router;
 
 import { getFolder, getFolders } from "#db/queries/folders";
+import { getFilesByFolder } from "#db/queries/files";
 
 router.get("/", async (req, res) => {
   const folders = await getFolders();
@@ -15,4 +16,10 @@ router.param("id", async (req, res, next, id) => {
 
   req.folder = folder;
   next();
+});
+
+router.get("/:id", async (req, res) => {
+  const folder = req.folder;
+  folder.files = await getFilesByFolder({ folder_id: folder.id });
+  res.send(folder);
 });
