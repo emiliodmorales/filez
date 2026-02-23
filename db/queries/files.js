@@ -15,3 +15,15 @@ export async function createFile({ name, size, folder_id }) {
     console.error(err);
   }
 }
+
+export async function getFiles() {
+  const SQL = `
+    SELECT * FROM files
+  `;
+  try {
+    const { rows: files } = await db.query(SQL);
+    return files;
+  } catch (err) {
+    console.error(err);
+  }
+}
