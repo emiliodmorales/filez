@@ -3,7 +3,7 @@ const router = Router();
 export default router;
 
 import { getFolder, getFolders } from "#db/queries/folders";
-import { getFilesByFolder } from "#db/queries/files";
+import { createFile, getFilesByFolder } from "#db/queries/files";
 
 router.get("/", async (req, res) => {
   const folders = await getFolders();
@@ -22,4 +22,15 @@ router.get("/:id", async (req, res) => {
   const folder = req.folder;
   folder.files = await getFilesByFolder({ folder_id: folder.id });
   res.send(folder);
+});
+
+router.post("/:id/files", async (req, res) => {
+  if (!req.body) return res.status(400).send("Request body not provided.");
+
+  const { name, size } = req.body;
+  if (!name || !size)
+    return res.status(400).send("Request body is missing required fields.");
+
+  const file = await createFile({ name, size, folder_id: req.folder.id });
+  res.status(201).send(file);
 });
