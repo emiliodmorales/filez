@@ -20,7 +20,7 @@ router.param("id", async (req, res, next, id) => {
 
 router.get("/:id", async (req, res) => {
   const folder = req.folder;
-  folder.files = await getFilesByFolder({ folder_id: folder.id });
+  folder.files = await getFilesByFolder(folder.id);
   res.send(folder);
 });
 
