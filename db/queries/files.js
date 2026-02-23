@@ -42,22 +42,3 @@ export async function getFiles() {
     console.error(err);
   }
 }
-
-/**
- * Retrieve all files within a specific folder
- * @param {number} folder_id - The id of the folder
- * @returns An array of files
- * @return undefined if no files are found
- */
-export async function getFilesByFolder(folder_id) {
-  const SQL = `
-    SELECT * FROM files
-    WHERE folder_id = $1
-  `;
-  try {
-    const { rows: files } = await db.query(SQL, [folder_id]);
-    return files;
-  } catch (err) {
-    console.error(err);
-  }
-}
